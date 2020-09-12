@@ -4,10 +4,10 @@ import java.util.concurrent.RecursiveTask;
 
 public class ArraySumTask extends RecursiveTask<Double> {
     private final long[] mas;
-    private final long start;
-    private final long end;
+    private final int start;
+    private final int end;
 
-    public ArraySumTask(long[] mas, long start, long end) {
+    public ArraySumTask(long[] mas, int start, int end) {
         this.mas = mas;
         this.start = start;
         this.end = end;
@@ -18,8 +18,8 @@ public class ArraySumTask extends RecursiveTask<Double> {
         double sum = 0;
         double avg;
         long length = end - start;
-        for (long x = start; x < length; x++) {
-            sum += mas[(int) x];
+        for (int x = start; x < length; x++) {
+            sum += mas[x];
         }
         avg = sum / length;
         return avg;
