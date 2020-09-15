@@ -16,14 +16,18 @@ public class ArraySumTask extends RecursiveTask<Integer> {
     @Override
     protected Integer compute() {
         int sum = 0;
-        long length;
-        if (start == mas.length / 2) {
-            length = mas.length;
+        if ((end - start) < mas.length) {
+            for (int i = start; i < end; i++) {
+                sum += mas[i];
+            }
         } else {
-            length = end - start;
-        }
-        for (int x = start; x < length; x++) {
-            sum += mas[x];
+            int middle = (start + end) / 2;
+            ArraySumTask task1 = new ArraySumTask(mas, start, middle);
+            ArraySumTask task2 = new ArraySumTask(mas, middle, end);
+
+            task1.fork();
+            task2.fork();
+            sum += task1.join() + task2.join();
         }
         return sum;
     }
