@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.concurrent.RecursiveTask;
 
-public class ArraySumTask extends RecursiveTask<Integer> {
+public class ArraySumTask extends RecursiveTask<Long> {
     private final long[] mas;
     private final int start;
     private final int end;
@@ -14,13 +14,14 @@ public class ArraySumTask extends RecursiveTask<Integer> {
     }
 
     @Override
-    protected Integer compute() {
-        int sum = 0;
-        if ((end - start) < mas.length) {
-            for (int i = start; i < end; i++) {
-                sum += mas[i];
-            }
-        } else {
+    protected Long compute() {
+        long sum = 0;
+        switch (end-start) {
+            case 0: return 0L;
+            case 1: return mas[start];
+            case 2: return mas[start] + mas[start+1];
+            default:
+
             int middle = (start + end) / 2;
             ArraySumTask task1 = new ArraySumTask(mas, start, middle);
             ArraySumTask task2 = new ArraySumTask(mas, middle, end);

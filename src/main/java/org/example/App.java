@@ -28,7 +28,7 @@ public class App {
 
     }
 
-    private static int sumArray(long[] array) {
+    private static long sumArray(long[] array) {
         ForkJoinPool fjp = new ForkJoinPool();
         ArraySumTask task = new ArraySumTask(array, 0, array.length);
         return fjp.invoke(task);
